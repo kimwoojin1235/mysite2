@@ -2,7 +2,8 @@
     pageEncoding="UTF-8"%>
      <%@ page import="java.util.List"%>
      <%@ page import="com.javaex.vo.GuestVo"%>
- <%List<GuestVo> gList= (List<GuestVo>)request.getAttribute("gList");	 %>
+ <%List<GuestVo> gList= (List<GuestVo>)request.getAttribute("gList");	 
+   %>
 <!DOCTYPE html>
 <html>
 <head>
