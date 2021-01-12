@@ -77,4 +77,56 @@ public class UserDao {
 			close();
 			return count;
 		}
+		public UserVo getUdes(String id, String pw) {
+			UserVo userVo = null;//디폴트 값은 널이다
+			getConnection();
+			try {
+				String query="";
+				query += " SELECT no,";
+				query += "        name";
+				query += " FROM users";
+				query += " WHERE id = ?";
+				query += " AND password = ?";
+				
+				pstmt =conn.prepareStatement(query);
+				pstmt.setString(1, id);
+				pstmt.setString(2, pw);
+				
+				rs= pstmt.executeQuery();
+				//결과처리
+				while (rs.next()) {
+					int no= rs.getInt("no");
+					String name =rs.getString("name"); 
+					userVo = new UserVo(no,name);
+					//주소가 생기면 주소를 넣는다.		
+				}
+			} catch (SQLException e) {
+				System.out.println("error:" + e);
+			}
+			close();
+			return userVo;
+			//들어간 주소값을 리턴
+		}
+		public int getupdate(UserVo uVo) {
+			int count = 0;
+			getConnection();
+			try {
+				String query="";
+				query += " UPDATE users";
+				query += " set password = ?,";
+				query += "     name, =?";
+				query += "     gender =?";
+				query += " WHERE no = ?";
+				pstmt = conn.prepareStatement(query);
+				pstmt.setString(1, uVo.getPassword());
+				pstmt.setString(2, uVo.getName());
+				pstmt.setString(3, uVo.getGender());
+				pstmt.setInt(4, uVo.getNo());
+				count = pstmt.executeUpdate();
+			} catch (SQLException e) {
+				System.out.println("error:" + e);
+			}
+			close();
+			return count;
+		}
 }

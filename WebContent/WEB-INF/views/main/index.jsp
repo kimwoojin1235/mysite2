@@ -1,5 +1,10 @@
+<%@page import="com.javaex.vo.UserVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+ 	UserVo authUser = (UserVo)session.getAttribute("authuser");
+//세션안의 값이 있는지 없는지 확인 하는거(인증용)
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,18 +20,21 @@
 
 		<div id="header">
 			<h1><a href="">MySite</a></h1>
-			
-			<!-- 
+			<!-- 로그인을 하지 안았을때 -->
+			<%if(authUser == null) {%>
+			<!-- authUser안에 값이 없다면 -->
 			<ul>
 				<li><a href="">로그인</a></li>
 				<li><a href="">회원가입</a></li>
 			</ul>
-			-->
+			<%}else{ %>
+			<!-- 로그인 했다면 -->
 			<ul>
-				<li>황일영 님 안녕하세요^^</li>
+				<li><%=authUser.getName()%>님 안녕하세요^^</li>
 				<li><a href="">로그아웃</a></li>
 				<li><a href="">회원정보수정</a></li>
 			</ul>
+			<%} %>
 			
 		</div>
 		<!-- //header -->

@@ -1,17 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-     <%@page import="com.javaex.vo.UserVo"%>
-    <%
- 	UserVo authUser = (UserVo)session.getAttribute("authuser");
-//세션안의 값이 있는지 없는지 확인 하는거(인증용)
-%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="/mysite2/assets/css/mysite.css" rel="stylesheet" type="text/css">
-<link href="/mysite2/assets/css/user.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/mysite.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/user.css" rel="stylesheet" type="text/css">
 
 </head>
 
@@ -22,21 +17,11 @@
 			<h1>
 				<a href="">MySite</a>
 			</h1>
-<!-- 로그인을 하지 안았을때 -->
-			<%if(authUser == null) {%>
-			<!-- authUser안에 값이 없다면 -->
+
 			<ul>
 				<li><a href="">로그인</a></li>
 				<li><a href="">회원가입</a></li>
 			</ul>
-			<%}else{ %>
-			<!-- 로그인 했다면 -->
-			<ul>
-				<li><%=authUser.getName()%>님 안녕하세요^^</li>
-				<li><a href="">로그아웃</a></li>
-				<li><a href="">회원정보수정</a></li>
-			</ul>
-			<%} %>
 		</div>
 		<!-- //header -->
 
@@ -64,27 +49,26 @@
 		<div id="content">
 			
 			<div id="content-head">
-            	<h3>회원가입</h3>
+            	<h3>회원정보</h3>
             	<div id="location">
             		<ul>
             			<li>홈</li>
             			<li>회원</li>
-            			<li class="last">회원가입</li>
+            			<li class="last">회원정보</li>
             		</ul>
             	</div>
                 <div class="clear"></div>
             </div>
-            <!-- //content-head -->
+             <!-- //content-head -->
 
 			<div id="user">
-				<div id="joinForm">
-					<form action="/mysite2/user" method="get">
+				<div id="modifyForm">
+					<form action="" method="">
 
 						<!-- 아이디 -->
 						<div class="form-group">
 							<label class="form-text" for="input-uid">아이디</label> 
-							<input type="text" id="input-uid" name="uid" value="" placeholder="아이디를 입력하세요">
-							<button type="button" id="">중복체크</button>
+							<span class="text-large bold">userid</span>
 						</div>
 
 						<!-- 비밀번호 -->
@@ -96,7 +80,7 @@
 						<!-- 이메일 -->
 						<div class="form-group">
 							<label class="form-text" for="input-name">이름</label> 
-							<input type="text" id="input-name" name="uname" value="" placeholder="이름을 입력하세요">
+							<input type="text" id="input-name" name="name" value="" placeholder="이름을 입력하세요">
 						</div>
 
 						<!-- //나이 -->
@@ -104,31 +88,23 @@
 							<span class="form-text">성별</span> 
 							
 							<label for="rdo-male">남</label> 
-							<input type="radio" id="rdo-male" name="gender" value="male" > 
+							<input type="radio" id="rdo-male" name="" value="" > 
 							
 							<label for="rdo-female">여</label> 
-							<input type="radio" id="rdo-female" name="gender" value="female" > 
+							<input type="radio" id="rdo-female" name="" value="" > 
 
 						</div>
 
-						<!-- 약관동의 -->
-						<div class="form-group">
-							<span class="form-text">약관동의</span> 
-							
-							<input type="checkbox" id="chk-agree" value="" name="">
-							<label for="chk-agree">서비스 약관에 동의합니다.</label> 
-						</div>
-						
 						<!-- 버튼영역 -->
 		                <div class="button-area">
-		                    <button type="submit" id="btn-submit">회원가입</button>
+		                    <button type="submit" id="btn-submit">회원정보수정</button>
 		                </div>
-		                
-		                <input type="text" name="action" value="join" >
 						
 					</form>
+				
+				
 				</div>
-				<!-- //joinForm -->
+				<!-- //modifyForm -->
 			</div>
 			<!-- //user -->
 		</div>
@@ -139,7 +115,7 @@
 			Copyright ⓒ 2020 황일영. All right reserved
 		</div>
 		<!-- //footer -->
-
+		
 	</div>
 	<!-- //wrap -->
 

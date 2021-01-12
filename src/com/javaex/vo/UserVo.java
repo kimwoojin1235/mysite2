@@ -9,12 +9,22 @@ public class UserVo {
 	public UserVo() {
 		super();
 	}
-	//로그인
-	public UserVo(String id, String password) {
+	//회원수정
+	public UserVo(int no, String password, String name, String gender) {
 		super();
-		this.id = id;
+		this.no = no;
 		this.password = password;
+		this.name = name;
+		this.gender = gender;
 	}
+
+	//로그인
+	public UserVo(int no, String name) {
+		super();
+		this.no = no;
+		this.name = name;
+	}
+	
 	//회원가입
 	public UserVo(String id, String password, String name, String gender) {
 		super();
