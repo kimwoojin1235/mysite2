@@ -53,8 +53,9 @@ public class GuestController extends HttpServlet {
 					if(er==1) {
 					response.sendRedirect("/mysite2/pbc?action=list");
 					}else if (er==0){
-						RequestDispatcher rd=request.getRequestDispatcher("/WEB-INF/passerror.jsp");
-						rd.forward(request, response);
+						/*RequestDispatcher rd=request.getRequestDispatcher("/WEB-INF/passerror.jsp");
+						rd.forward(request, response);*/
+						WebUtil.forword(request, response, "/WEB-INF/views/guestbook/DeleteForm.jsp");
 					}
 				}
 				
