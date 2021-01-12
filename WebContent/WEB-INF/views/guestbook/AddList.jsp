@@ -110,9 +110,9 @@
 					<tr>
 						<td colspan=4 class="text-left"><%= gList.get(i).getContent() %></td>
 					</tr>
-					<br>
 					<%} %>
 				</table>
+				<br>
 				<!-- //guestRead -->
 				
 			</div>
