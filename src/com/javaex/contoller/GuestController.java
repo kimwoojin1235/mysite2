@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.javaex.dao.GuestDao;
-
+import com.javaex.util.WebUtil;
 import com.javaex.vo.GuestVo;
 
 
@@ -26,8 +26,9 @@ public class GuestController extends HttpServlet {
 					List<GuestVo> gList= gDao.getList();
 
 					request.setAttribute("gList",gList);
-					RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/guestbook/AddList.jsp"); //jsp파일 위치를 알려줌
-					rd.forward(request, response);
+					/*RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/guestbook/AddList.jsp");
+					rd.forward(request, response);*/
+					WebUtil.forword(request, response, "/WEB-INF/views/guestbook/AddList.jsp");
 				}else if ("add".equals(action)) {
 
 					String name = request.getParameter("name");
@@ -40,8 +41,9 @@ public class GuestController extends HttpServlet {
 					guDao.guestinsert(guVo);
 					response.sendRedirect("/mysite2/pbc?action=list");
 				}else if ("deleteForm".equals(action)) {
-					RequestDispatcher rd=request.getRequestDispatcher("/WEB-INF/views/guestbook/DeleteForm.jsp");
-					rd.forward(request, response);
+					/*RequestDispatcher rd=request.getRequestDispatcher("/WEB-INF/views/guestbook/DeleteForm.jsp");
+					rd.forward(request, response);*/
+					WebUtil.forword(request, response, "/WEB-INF/views/guestbook/DeleteForm.jsp");
 				}else if ("delete".equals(action)) {
 					int no=Integer.parseInt(request.getParameter("no"));
 					String password = request.getParameter("password");
