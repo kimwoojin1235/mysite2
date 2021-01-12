@@ -26,8 +26,10 @@ public class GuestController extends HttpServlet {
 					List<GuestVo> gList= gDao.getList();
 
 					request.setAttribute("gList",gList);
+					//기존방식
 					/*RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/guestbook/AddList.jsp");
 					rd.forward(request, response);*/
+					//util방식
 					WebUtil.forword(request, response, "/WEB-INF/views/guestbook/AddList.jsp");
 				}else if ("add".equals(action)) {
 
