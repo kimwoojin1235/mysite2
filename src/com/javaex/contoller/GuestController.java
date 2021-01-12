@@ -30,6 +30,7 @@ public class GuestController extends HttpServlet {
 					/*RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/guestbook/AddList.jsp");
 					rd.forward(request, response);*/
 					//util방식
+					//forword는 요청을 받고 request받는 것이다
 					WebUtil.forword(request, response, "/WEB-INF/views/guestbook/AddList.jsp");
 				}else if ("add".equals(action)) {
 
@@ -42,6 +43,7 @@ public class GuestController extends HttpServlet {
 					GuestDao guDao = new GuestDao();
 					guDao.guestinsert(guVo);
 					//response.sendRedirect("/mysite2/pbc?action=list");
+					//redirect는 응답을 보내는 것이다.
 					WebUtil.redirect(request, response, "/mysite2/pbc?action=list");
 				}else if ("deleteForm".equals(action)) {
 					/*RequestDispatcher rd=request.getRequestDispatcher("/WEB-INF/views/guestbook/DeleteForm.jsp");
