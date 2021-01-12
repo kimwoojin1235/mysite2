@@ -41,7 +41,8 @@ public class GuestController extends HttpServlet {
 
 					GuestDao guDao = new GuestDao();
 					guDao.guestinsert(guVo);
-					response.sendRedirect("/mysite2/pbc?action=list");
+					//response.sendRedirect("/mysite2/pbc?action=list");
+					WebUtil.redirect(request, response, "/mysite2/pbc?action=list");
 				}else if ("deleteForm".equals(action)) {
 					/*RequestDispatcher rd=request.getRequestDispatcher("/WEB-INF/views/guestbook/DeleteForm.jsp");
 					rd.forward(request, response);*/
@@ -53,7 +54,8 @@ public class GuestController extends HttpServlet {
 					GuestDao guestDao = new GuestDao();		
 					int er=guestDao.guestdelete(guestVo);
 					if(er==1) {
-					response.sendRedirect("/mysite2/pbc?action=list");
+					//response.sendRedirect("/mysite2/pbc?action=list");
+					WebUtil.redirect(request, response,"/mysite2/pbc?action=list");
 					}else if (er==0){
 						/*RequestDispatcher rd=request.getRequestDispatcher("/WEB-INF/passerror.jsp");
 						rd.forward(request, response);*/
