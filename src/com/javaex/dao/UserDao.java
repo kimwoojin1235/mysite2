@@ -76,7 +76,7 @@ public class UserDao {
 			}
 			close();
 			return count;
-		}
+		}//로그인시 세션의 정보 저장용
 		public UserVo getUdes(String id, String pw) {
 			UserVo userVo = null;//디폴트 값은 널이다
 			getConnection();
@@ -107,26 +107,69 @@ public class UserDao {
 			return userVo;
 			//들어간 주소값을 리턴
 		}
-		public int getupdate(UserVo uVo) {
-			int count = 0;
+		//사용자 정보 가지고 오기 메소드(회원정보 수정용)
+		public UserVo getUser(int no) {
+			UserVo userVo = null;
 			getConnection();
 			try {
 				String query="";
-				query += " UPDATE users";
-				query += " set password = ?,";
-				query += "     name, =?";
-				query += "     gender =?";
+				query += " SELECT no,";
+				query += "        id,";
+				query += "        password,";
+				query += "        name,";
+				query += "        gender";
+				query += " FROM users";
 				query += " WHERE no = ?";
 				pstmt = conn.prepareStatement(query);
-				pstmt.setString(1, uVo.getPassword());
-				pstmt.setString(2, uVo.getName());
-				pstmt.setString(3, uVo.getGender());
-				pstmt.setInt(4, uVo.getNo());
-				count = pstmt.executeUpdate();
+				pstmt.setInt(1, no);
+				rs = pstmt.executeQuery();
+				//결과처리
+				while(rs.next()) {
+					int uNo= rs.getInt("no");
+					String id =rs.getString("id");
+					String password = rs.getString("password"); 
+					String name =rs.getString("name");
+					String gender =rs.getString("gender"); 
+					userVo =new UserVo(uNo,id,password,name,gender);
+				}
 			} catch (SQLException e) {
 				System.out.println("error:" + e);
 			}
 			close();
+			return userVo;
+		}
+		public int userupdate(UserVo uVo) {
+			int count = 0;
+			getConnection();
+			
+			try {
+			
+				// 3. SQL문 준비 / 바인딩 / 실행
+				String query ="";
+				query +=" update users";
+				query +=" set password = ?,";
+				query +="     name = ?,";
+				query +="     gender = ?";
+				query +=" where no = ?";
+				
+				pstmt = conn.prepareStatement(query);
+				
+				pstmt.setString(1,uVo.getPassword());
+				pstmt.setString(2, uVo.getName());
+				pstmt.setString(3, uVo.getGender());
+				pstmt.setInt(4, uVo.getNo());
+				
+				count = pstmt.executeUpdate();
+				System.out.println("[DAO]: " + count + "건이 수정되었습니다.");
+				// 4.결과처리
+				System.out.println("userDao : "+count);
+			} catch (SQLException e) {
+			    System.out.println("error:" + e);
+			}
+			close();
+			
 			return count;
 		}
+
+		
 }

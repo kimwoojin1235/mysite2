@@ -24,7 +24,11 @@ public class UserVo {
 		this.no = no;
 		this.name = name;
 	}
-	
+	public UserVo(String password, String name) {
+		super();
+		this.password = password;
+		this.name = name;
+	}
 	//회원가입
 	public UserVo(String id, String password, String name, String gender) {
 		super();

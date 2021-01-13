@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import com.javaex.dao.UserDao;
 import com.javaex.util.WebUtil;
 import com.javaex.vo.UserVo;
+import com.sun.xml.internal.bind.v2.runtime.Name;
 
 @WebServlet("/user")
 public class UserController extends HttpServlet {
@@ -55,7 +56,7 @@ public class UserController extends HttpServlet {
 			if(authvo ==null) {//로그인 실패
 				System.out.println("로그인 실패");
 				//리다이렉트
-				WebUtil.redirect(request, response, "/mysite2/user?action=loginForm");
+				WebUtil.redirect(request, response, "/mysite2/user?action=loginForm&result=fail");
 			}else {//성공일때
 				HttpSession session= request.getSession();//구별을 위한 번호를 준다.
 				session.setAttribute("authuser",authvo);//로그인을 위해 메인에 값을 보낸다
@@ -74,10 +75,36 @@ public class UserController extends HttpServlet {
 			WebUtil.redirect(request, response, "/mysite2/main");
 		}else if ("modifyForm".equals(action)) {
 			System.out.println("회원정보 수정폼");
-			WebUtil.forword(request, response, "/WEB-INF/views/users/ModifyFowm.jsp");
+			//세션에 있는 no값을 불러온다.
+			HttpSession session = request.getSession();
+			//로그할때 사용하는 authuser을 이용하여 불러온다
+			UserVo authuser = (UserVo)session.getAttribute("authuser");
+			int no = authuser.getNo();
+			//회원정보 가지고 오기
+			UserDao userDao = new UserDao();
+			UserVo uvo =userDao.getUser(no);
+			//로그인한 유저의 no를 불러온다.
+			//uvo전달포워드
+			request.setAttribute("userVo", uvo);
+			//포워드
+			WebUtil.forword(request, response, "/WEB-INF/views/users/ModifyForm.jsp");
 		}else if ("modify".equals(action)) {
-			System.out.println("회원정보 수정");
+			System.out.println("actiom"+action);
+			System.out.println("회원정보 수정");	
+			String password = request.getParameter("pw");
+			String name = request.getParameter("name");
+			String gender = request.getParameter("gender");
+			HttpSession session =request.getSession();
+			UserVo authUser = (UserVo)session.getAttribute("authuser");
+			int no = authUser.getNo();
 			
+			UserVo userVo = new UserVo(no, password, name, gender);
+			System.out.println(userVo);
+			//db의 정보를 수정한 걸로 바꾼다.
+			UserDao userDao = new UserDao();
+			userDao.userupdate(userVo);
+			//session의 네임값만 변경을 한다
+			authUser.setName(name);
 			WebUtil.redirect(request, response, "/mysite2/main");
 		}
 
