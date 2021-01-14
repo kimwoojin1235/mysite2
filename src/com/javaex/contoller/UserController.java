@@ -91,6 +91,7 @@ public class UserController extends HttpServlet {
 		}else if ("modify".equals(action)) {
 			System.out.println("actiom"+action);
 			System.out.println("회원정보 수정");	
+			//파라미터로 전달
 			String password = request.getParameter("pw");
 			String name = request.getParameter("name");
 			String gender = request.getParameter("gender");

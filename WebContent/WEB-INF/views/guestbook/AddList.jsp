@@ -4,6 +4,7 @@
      <%@ page import="com.javaex.vo.GuestVo"%>
  <%List<GuestVo> gList= (List<GuestVo>)request.getAttribute("gList");	 
    %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,13 +18,13 @@
 <body>
 	<div id="wrap">
 
-		<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
+		<c:import url="/WEB-INF/views/include/header.jsp"></c:import>
 
 		<div id="aside">
 			<h2>방명록</h2>
 			<ul>
 				<li>일반방명록</li>
-				<li>ajax방명록</li>
+				<li>방명록</li>
 			</ul>
 		</div>
 		<!-- //aside -->
@@ -80,17 +81,17 @@
 						<col style="width: 40%;">
 						<col style="width: 10%;">
 					</colgroup>
-					<% for(int i=0; i<gList.size();i++) { %>
+					<c:forEach items="${gList}" var="vo">
 					<tr>
-					<td><%= gList.get(i).getNo() %></td>
-					<td><%= gList.get(i).getName() %></td>
-					<td><%= gList.get(i).getRegdate() %></td>
-					<td><a href="./pbc?action=deleteForm&no=<%=gList.get(i).getNo()%>">삭제</a></td>
+					<td>${vo.no}</td>
+					<td>${vo.name}</td>
+					<td>${vo.regdate}</td>
+					<td><a href="./pbc?action=deleteForm&no=${vo.no}">삭제</a></td>
 					</tr>
 					<tr>
-						<td colspan=4 class="text-left"><%= gList.get(i).getContent() %></td>
+						<td colspan=4 class="text-left">${vo.content}</td>
 					</tr>
-					<%} %>
+					</c:forEach>
 				</table>
 				<br>
 				<!-- //guestRead -->

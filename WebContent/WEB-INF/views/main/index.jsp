@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html>
 <html>
@@ -15,7 +16,7 @@
 	<div id="wrap">
 
 	<!-- 헤더,네비 있던자리 -->
-	<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
+	<c:import url="/WEB-INF/views/include/header.jsp"></c:import>
 	
 
 		<!-- aside없음 -->
@@ -58,7 +59,7 @@
 		<!-- //full-content -->
 		<div class="clear"></div>
 		
-		<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+		<c:import url="/WEB-INF/views/include/footer.jsp"></c:import>
 	</div>
 	<!-- //wrap -->
 

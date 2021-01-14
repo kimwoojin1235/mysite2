@@ -3,6 +3,7 @@
     <%
 	int on = Integer.parseInt(request.getParameter("no"));	
 %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,13 +17,13 @@
 <body>
 	<div id="wrap">
 
-		<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
+		<c:import url="/WEB-INF/views/include/header.jsp"></c:import>
 
 		<div id="aside">
 			<h2>방명록</h2>
 			<ul>
 				<li>일반방명록</li>
-				<li>ajax방명록</li>
+				<li>방명록</li>
 			</ul>
 		</div>
 		<!-- //aside -->
@@ -54,7 +55,7 @@
 						<tr>
 							<td>비밀번호</td>
 							<td><input type="password" name="password"></td>
-							<input type="hidden" name="no" value=<%=on%>>
+							<input type="hidden" name="no" value=${param.no }>
 							<input type="hidden" name="action"value="delete"><br>
 							<td class="text-left"><button type="submit">삭제</button></td>
 							<td><a href="/guestbook/gcr?action=list">[메인으로 돌아가기]</a></td>
