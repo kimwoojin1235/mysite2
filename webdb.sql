@@ -31,4 +31,5 @@ COMMIT;
 
 SELECT
     *
+    
 FROM users;
